@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulačka</title> <!-- Titulek stránky -->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Nastavení písma pro celou stránku */
+            text-align: center; /* Vystředění textu a prvků na stránce */
+            padding-top: 50px; /* Odstup shora */
+        }
+        .calculator {
+            display: inline-block; /* Nastaví kalkulačku jako blokový prvek pro snadnější zarovnání */
+            padding: 20px; /* Vnitřní okraje kolem obsahu kalkulačky */
+            border: 1px solid #ccc; /* Jemné orámování kalkulačky */
+            border-radius: 10px; /* Zakulacení rohů kalkulačky */
+        }
+        input, select, button {
+            margin: 5px; /* Mezera mezi jednotlivými prvky (pole, tlačítka) */
+            font-size: 18px; /* Velikost písma */
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Kalkulačka</h1>
+    <!-- Hlavní kalkulačka -->
+    <div class="calculator">
+        <!-- První vstupní pole pro zadání prvního čísla -->
+        <input type="number" id="num1" placeholder="Číslo 1">
+
+        <!-- Výběrové pole pro výběr operátoru (+ nebo -) -->
+        <select id="operator">
+            <option value="+">+</option> <!-- Možnost sčítání -->
+            <option value="-">-</option> <!-- Možnost odečítání -->
+            <option value="*">×</option> <!-- Možnost násobení -->
+            <option value="/">÷</option> <!-- Možnost dělení -->
+        </select>
+
+        <!-- Druhé vstupní pole pro zadání druhého čísla -->
+        <input type="number" id="num2" placeholder="Číslo 2">
+
+        <br>
+
+        <!-- Tlačítko "=" pro výpočet výsledku -->
+        <button onclick="calculate()">=</button>
+
+        <br>
+
+        <!-- Pole pro zobrazení výsledku (pouze pro čtení) -->
+        <input type="text" id="result" placeholder="Výsledek" readonly>
+    </div>
+
+    <!-- JavaScript pro logiku kalkulačky -->
+    <script>
+        // Funkce, která se spustí po kliknutí na tlačítko "="
+        function calculate() {
+            // Získání hodnot z prvního čísla, operátoru a druhého čísla
+            var num1 = parseFloat(document.getElementById('num1').value); // Hodnota prvního čísla
+            var operator = document.getElementById('operator').value; // Zvolený operátor (+ nebo -)
+            var num2 = parseFloat(document.getElementById('num2').value); // Hodnota druhého čísla
+            var result; // Proměnná pro výsledek
+
+            // Podmínky pro sčítání a odečítání
+            if (operator === "+") 
+            {
+                result = num1 + num2; // Pokud je zvolen operátor "+", provede sčítání
+            } 
+            else if (operator === "-") 
+            {
+                result = num1 - num2; // Pokud je zvolen operátor "-", provede odečítání
+            } 
+            else if (operator === "*") 
+            {
+                result = num1 * num2; // Násobení
+            } 
+            else if (operator === "/") 
+            {
+                if (num2 === 0) 
+                { 
+                    // Kontrola dělení nulou
+                    result = "Chyba: dělení nulou"; // Zobrazení chybové zprávy při dělení nulou
+                } 
+                else 
+                {
+                    result = num1 / num2; // Dělení
+                }
+            }
+            
+
+            // Zobrazení výsledku v poli pro výsledek
+            document.getElementById('result').value = result;
+        }
+    </script>
+</body>
+</html>
